@@ -1,12 +1,12 @@
-###########   TP3 -- FANTAISIE    ###########
+###########        READ ME        ###########
 #                                           #
-#                  READ ME                  #
+#              TP3 -- FANTAISIE             #
 #                                           #
 ###########        -------        ###########
 
-Ceci correspond au projet Maven du TP3 POOMO.
+This is the maven project for the TP3 "fantaisie".
 
-arborescence packages: 
+Packages tree:
 
 fantaisie_TP3
   |__ attaque
@@ -21,7 +21,8 @@ fantaisie_TP3
   |__ mainApp
   |__ mainAppOld (for test purposes only + TP1)  
 
-Les "test fonctionnels" se trouvent dans le
+
+NOTE: Les "test fonctionnels" se trouvent dans le
 package mainApp.
               
         
