@@ -8,7 +8,7 @@ import fantaisie_TP3.protagoniste.Monstre;
 
 public class Bataille {
     /* in <? extends Pouvoir> :  extends Pouvoir maybe useless but added
-     * for completeness   */
+     * for completeness         */
     
     private Camp<Homme> campHumains = new Camp<>();
     private Camp<Monstre<? extends Pouvoir>> campMonstres = new Camp<>(); 

@@ -47,8 +47,8 @@ public class Camp<T extends EtreVivant> implements Iterable<T> {
     }
 
     /**
-     * This method must be used with the liste toString
-     * like in the version {@link #toString_old()} but for a more
+     * This method must be used with the list toString
+     * like in the version {@link #toString_old} but for a more
      * elegant format we use this verion.
      */
     @Override

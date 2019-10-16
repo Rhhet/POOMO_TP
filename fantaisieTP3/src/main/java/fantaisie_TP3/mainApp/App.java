@@ -1,5 +1,7 @@
 package fantaisie_TP3.mainApp;
 
+import java.util.NavigableSet;
+
 import fantaisie_TP3.attaque.pouvoirs.Pouvoir;
 import fantaisie_TP3.attaque.pouvoirs.fireSpells.*;
 import fantaisie_TP3.attaque.pouvoirs.iceSpells.*;
@@ -53,6 +55,8 @@ public class App {
         AideEcrivain test = new AideEcrivain(bataille);
         System.out.println(test.visualiserForcesHumaines());
 
+        /* ----------------------------  TP3.1  --------------------------------------- */
+
         System.out.println(test.ordreNaturelMonstre());
         System.out.println();
 
@@ -60,6 +64,53 @@ public class App {
         //System.out.println(test.getDomSet());
         System.out.println(test.ordreMonstreDomaine());
         System.out.println();
-        System.out.println(test.firstMonstreDomaine(Domaine.TRANCHANT));
+
+        /* ----------------------------  TP3.2  --------------------------------------- */
+        
+        //test.initMonstresDeFeu_nMod_old();
+        test.initMonstresDeFeu_nMod();
+        test.initMonstresDeGlace_nMod();
+        test.initMonstresTranchants_nMod();
+
+        NavigableSet<Monstre<?>> monstres = test.getMonstresDeFeu();
+
+        System.out.println(AideEcrivain.affichageMonstres(monstres));
+        
+        Monstre<Glace> soufflemort = new Monstre<>("soufflemort", 120, ZoneDeCombat.AERIEN,
+                Domaine.GLACE, new Tornade(8));
+        Monstre<Feu> cramombre = new Monstre<>("cramombre", 80, ZoneDeCombat.TERRESTRE,
+                Domaine.FEU, new BouleDeFeu(2), new Lave(1));
+
+        soufflemort.rejoindBataille(bataille);
+        cramombre.rejoindBataille(bataille);
+
+        test.updateMonstresDomaine();
+        /* the view monstres is automatically updated, just need to update the base tree set
+         * which is done by calling updateMonstresDomaine() or getMonstresDeFeu() but the latter
+         * re-initializes the view which isn't needed.  */
+        //monstres = test.getMonstresDeFeu();
+        System.out.println(AideEcrivain.affichageMonstres(monstres));
+
+        Monstre<Glace> givrogolem = new Monstre<>("givrogolem", 200, ZoneDeCombat.TERRESTRE,
+                Domaine.GLACE, new PicsDeGlace(10));
+        givrogolem.rejoindBataille(bataille);
+
+        test.updateMonstresDomaine();
+        System.out.println(AideEcrivain.affichageMonstres(monstres));
+
+        Monstre<Feu> aqualave = new Monstre<>("aqualave", 30, ZoneDeCombat.AQUATIQUE,
+                Domaine.FEU, new Lave(5));
+        Monstre<Tranchant> requispectre = new Monstre<>("requispectre", 200, ZoneDeCombat.AQUATIQUE,
+                Domaine.TRANCHANT, new Griffe());
+        aqualave.rejoindBataille(bataille);
+        requispectre.rejoindBataille(bataille);
+        
+        test.updateMonstresDomaine();
+
+        System.out.println("\n" + test.ordreMonstreDomaine());
+
+        System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresDeFeu()));
+        System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresDeGlace()));
+        System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresTranchants()));
     }
 }

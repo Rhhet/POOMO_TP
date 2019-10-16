@@ -13,7 +13,7 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
     private Domaine domaine;
     private GestionAttaque gstAtt;
 
-    // constructor
+
     @SafeVarargs
     public Monstre(String nom, int forceDeVie, ZoneDeCombat zdc, 
                    Domaine dom, T ... attaques) {
@@ -33,7 +33,6 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
         bataille.eliminer(this);
     }
 
-    /* classe interne */
 
     private class GestionAttaque implements Iterator<T> {
 
@@ -133,7 +132,6 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
         return str.substring(0, str.length() - 2);
     }
 
-    
     /*  *** Other version ***
      (format moins lisible mais utilise toString() de Feu inherited de ForceDeCombat)
 

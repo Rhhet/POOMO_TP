@@ -1,15 +1,15 @@
 package fantaisie_TP3.livre;
 
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NavigableSet;
+import java.util.NoSuchElementException;
 import java.util.TreeSet;
 
-import fantaisie_TP3.attaque.pouvoirs.Pouvoir;
-//import fantaisie_TP3.protagoniste.EtreVivant;
 //import fantaisie_TP3.attaque.pouvoirs.Pouvoir;
 import fantaisie_TP3.bataille.Bataille;
 import fantaisie_TP3.bataille.Camp;
@@ -207,32 +207,104 @@ public class AideEcrivain {
         return listeTriee;
     }
 
-    public Monstre<?> firstMonstreDomaine(Domaine domaine) {
-        Monstre<?> mstr = new Monstre<>("", 0, null, domaine, (Pouvoir [])null);
-        return monstresDomaineSet.ceiling(mstr);
+    //NOTE: The methods tagged _nMod are non modular, badly coded methods.
+
+    // In the init... methods, the degenerate object's name "" will always 
+    // be less than the other objects' names.
+
+
+    public void initMonstresDeFeu_nMod() {
+        Monstre<?> sup = new Monstre<>("", 0, null, Domaine.GLACE);
+        monstresDeFeu = monstresDomaineSet.headSet(sup, false);
     }
 
+    public void initMonstresDeGlace_nMod() {
+        Monstre<?> inf = new Monstre<>("", 0, null, Domaine.GLACE);
+        Monstre<?> sup = new Monstre<>("", 0, null, Domaine.TRANCHANT);
+        monstresDeGlace = monstresDomaineSet.subSet(inf, true, sup, false);
+    }
+
+    public void initMonstresTranchants_nMod() {
+        Monstre<?> inf = new Monstre<>("", 0, null, Domaine.TRANCHANT);
+        monstresTranchants = monstresDomaineSet.tailSet(inf, true);
+    }
+
+
+    public static String affichageMonstres(NavigableSet<Monstre<?>> monstres) {
+        String str = "";
+        for (Monstre<?> mstr : monstres) {
+            str = monstreDomIDcpy(str, mstr);
+        }
+        return str.substring(0, str.length() - 2);
+    }
+
+    /**
+     * 
+     * @param str the source string being concatenated.
+     * @param mstr 
+     * @return the string str concatenated with the name and domain of {@code mstr}.
+     */
+    private static String monstreDomIDcpy(String str, Monstre<?> mstr) {
+        if (mstr.getDomaine() == Domaine.TRANCHANT)
+            str += mstr.getNom() + " monstre " + Domaine.TRANCHANT + ", ";
+        else
+            str += mstr.getNom() + " monstre de " + mstr.getDomaine() + ", ";
+        return str;
+    }
+
+    // old methods TP3.2.2
+
+    /**
+     * Bad coding, not modular (and if i have no ice monster? or if
+     * i decide to add a domain between FEU and GLACE?).
+     * <p>This method relies on the method {@link #firstMonstreDomaine_old} 
+     * but the first monster returned is never updated for the view.</p>
+     */
+    public void initMonstresDeFeu_nMod_old() {
+        Monstre<?> mstr = firstMonstreDomaine_old(Domaine.GLACE);
+        monstresDeFeu = monstresDomaineSet.headSet(mstr, false);
+    }
+
+    private Monstre<?> firstMonstreDomaine_old(Domaine domaine) {
+        for (Monstre<?> mstr : monstresDomaineSet) {
+            if (mstr.getDomaine() == domaine) {
+                return mstr;
+            }
+        }
+        throw new NoSuchElementException("No " + domaine + " monster.");
+    }
+    
     
     /* ----------------------------------------------------------------------- */
 
     public NavigableSet<Monstre<?>> getDomSet() {
+        updateMonstresDomaine();
         return monstresDomaineSet;
     }
 
+    public NavigableSet<Monstre<?>> getZoneSet() {
+        updateMonstresZone();
+        return monstresZoneSet;
+    }
+
     public NavigableSet<Monstre<?>> getMonstresDeFeu() {
+        updateMonstresDomaine();
         return monstresDeFeu;
     }
 
     public NavigableSet<Monstre<?>> getMonstresDeGlace() {
+        updateMonstresDomaine();
         return monstresDeGlace;
     }
 
     public NavigableSet<Monstre<?>> getMonstresTranchants() {
+        updateMonstresDomaine();
         return monstresTranchants;
     }
 
     /* ----------------------------------------------------------------------- */
 
+    
     /**
      * This method works fine (uses the properties of the linkedlist
      * and of the listiterator) but doesn't follow the restrictions.
@@ -282,4 +354,22 @@ public class AideEcrivain {
         }
         return str.substring(0, str.length() - 2);
     }        
+
+    @Deprecated
+    public NavigableSet<Monstre<?>> initMonstresDeDom(Domaine dom) {
+        Iterator<Monstre<?>> iter = monstresDomaineSet.iterator();
+        Monstre<?> mstrInf = iter.next();
+
+        while (iter.hasNext() && mstrInf.getDomaine() != dom) 
+            mstrInf = iter.next();
+        Monstre<?> mstrSup = mstrInf;
+
+        while (iter.hasNext() && mstrSup.getDomaine() == dom) 
+            mstrSup = iter.next();
+
+        return monstresDomaineSet.subSet(mstrInf, true, mstrSup, false);        
+    }
+
 }
+
+    
