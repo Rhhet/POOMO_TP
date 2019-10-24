@@ -6,12 +6,9 @@
 #                                           #
 ###########        -------        ###########
 
-Ceci correspond au projet Maven du TP2
+TP3 maven project
 
-
----Peut s'importer sous Eclipse---
-
-arborescence packages: 
+packages tree:
 
 fantaisie_TP3
   |__ attaque
@@ -25,5 +22,6 @@ fantaisie_TP3
   |__ livre
   |__ mainApp
   |__ mainAppOld (for test purposes only + TP1)  
-              
+util
+  |_line
         
