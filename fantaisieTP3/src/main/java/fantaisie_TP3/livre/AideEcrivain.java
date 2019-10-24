@@ -10,7 +10,6 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 
-//import fantaisie_TP3.attaque.pouvoirs.Pouvoir;
 import fantaisie_TP3.bataille.Bataille;
 import fantaisie_TP3.bataille.Camp;
 import fantaisie_TP3.protagoniste.Domaine;
@@ -83,7 +82,7 @@ public class AideEcrivain {
      * Add one by one the monsters in the camp of monsters to the monsters' set.
      * <p>Setter for {@link #monstresDomaineSet}.</p>
      */
-    public void updateMonstresDomaine() {
+    private void updateMonstresDomaine() {
         Camp<Monstre<?>> camp = bataille.getCampMonstres();
 
         for (Iterator<Monstre<?>> iter = camp.iterator(); iter.hasNext(); ) {
@@ -95,7 +94,7 @@ public class AideEcrivain {
      * Add one by one the monsters in the camp of monsters to the monsters' set.
      * <p>Setter for {@link #monstreZoneSet}.</p>
      */
-    public void updateMonstresZone() {
+    private void updateMonstresZone() {
         Camp<Monstre<?>> camp = bataille.getCampMonstres();
 
         for (Iterator<Monstre<?>> iter = camp.iterator(); iter.hasNext(); ) {
@@ -105,7 +104,7 @@ public class AideEcrivain {
 
     /**
      * Note: this implementation doesn't rely on {@link Domaine}, adding new
-     * domains won't require the method to be changed.
+     * domains for example won't require the method to be changed.
      * <p>The method {@link #updateMonstresDomaine()} is called first by the method.</p>
      * @return the monsters in battle classified by domain and ordered by name
      */
@@ -135,7 +134,7 @@ public class AideEcrivain {
      * Note: this implementation doesn't rely on {@link Zone}, adding new
      * zones won't require the method to be changed.
      * <p>The method {@link #updateMonstresZone()} is called first by the method.</p>
-     * @return the monsters in battle classified by zone and ordered by 
+     * @return the monsters in battle classified by zone, ordered by 
      * hit point and name.
      */
     public String ordreMonstreZone() {
@@ -207,11 +206,13 @@ public class AideEcrivain {
         return listeTriee;
     }
 
-    //NOTE: The methods tagged _nMod are non modular, badly coded methods.
+    /* NOTE: The methods tagged _nMod are non modular, have to be changed
+     * to a better form. These methods depends for example, on the order
+     * of the enum Domaine, and have to be completely different if we had
+     * a new domain.  */
 
     // In the init... methods, the degenerate object's name "" will always 
     // be less than the other objects' names.
-
 
     public void initMonstresDeFeu_nMod() {
         Monstre<?> sup = new Monstre<>("", 0, null, Domaine.GLACE);
@@ -228,7 +229,6 @@ public class AideEcrivain {
         Monstre<?> inf = new Monstre<>("", 0, null, Domaine.TRANCHANT);
         monstresTranchants = monstresDomaineSet.tailSet(inf, true);
     }
-
 
     public static String affichageMonstres(NavigableSet<Monstre<?>> monstres) {
         String str = "";
@@ -255,8 +255,8 @@ public class AideEcrivain {
     // old methods TP3.2.2
 
     /**
-     * Bad coding, not modular (and if i have no ice monster? or if
-     * i decide to add a domain between FEU and GLACE?).
+     * Bad coding, not modular (and if we have no ice monster? or if
+     * we decide to add a domain between FEU and GLACE?).
      * <p>This method relies on the method {@link #firstMonstreDomaine_old} 
      * but the first monster returned is never updated for the view.</p>
      */

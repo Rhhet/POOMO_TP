@@ -7,7 +7,6 @@ import java.util.List;
 import fantaisie_TP3.protagoniste.EtreVivant;
 
 
-
 public class Camp<T extends EtreVivant> implements Iterable<T> {
 
     List<T> liste = new LinkedList<>();  //called listeCamp in part 2. in "contraintes" ...
@@ -33,12 +32,13 @@ public class Camp<T extends EtreVivant> implements Iterable<T> {
         }
     }
 
-    public Iterator<T> iterator() {
-        return liste.listIterator();
-    }
-
     public List<T> getListe() {
         return liste;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return liste.listIterator();
     }
 
     @Deprecated
@@ -49,7 +49,7 @@ public class Camp<T extends EtreVivant> implements Iterable<T> {
     /**
      * This method must be used with the list toString
      * like in the version {@link #toString_old} but for a more
-     * elegant format we use this verion.
+     * readable format we use this verion.
      */
     @Override
     public String toString() {

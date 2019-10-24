@@ -8,10 +8,10 @@ public class Morsure extends Tranchant {
      * @param pointDeDegat    - depends on the monster who uses this spell
      */
     public Morsure(int pointDeDegat) {
-        super(pointDeDegat, "Morsure", -1);    //nbUtilisationPouvoirInitial = -1 means 
+        super(pointDeDegat, "Morsure", -1);    // nbUtilisationPouvoirInitial = -1 means 
     }                                          // infinite nb of utilisations
 
-    //override utiliser(): Morsure utilisable un nb infini de fois...
+    // Morsure utilisable un nb infini de fois...
     @Override
     public int utiliser() {
 		if (isOperationnel())

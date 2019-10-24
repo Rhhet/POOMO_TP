@@ -1,12 +1,17 @@
-###########        READ ME        ###########
+--> Groupe: 
+
+###########   TP2 -- FANTAISIE    ###########
 #                                           #
-#              TP3 -- FANTAISIE             #
+#      Téri   GRANDPIERRE   ---- READ ME    #
 #                                           #
 ###########        -------        ###########
 
-This is the maven project for the TP3 "fantaisie".
+Ceci correspond au projet Maven du TP2
 
-Packages tree:
+
+---Peut s'importer sous Eclipse---
+
+arborescence packages: 
 
 fantaisie_TP3
   |__ attaque
@@ -20,10 +25,5 @@ fantaisie_TP3
   |__ livre
   |__ mainApp
   |__ mainAppOld (for test purposes only + TP1)  
-
-
-NOTE: Les "test fonctionnels" se trouvent dans le
-package mainApp.
               
         
-TG

@@ -3,7 +3,6 @@ package fantaisie_TP3.protagoniste;
 import fantaisie_TP3.bataille.Bataille;
 
 
-
 public class Homme extends EtreVivant {
 
     private static final int PV = 70;
@@ -18,12 +17,14 @@ public class Homme extends EtreVivant {
         bataille.ajouter(this);
     }
 
+    @Override
     public void mourir() {
+        Bataille bataille = getBataille();
         bataille.eliminer(this);
     }
 
     @Override
     public String toString() {
-        return getNom() + " (PV: " + forceDeVie + ")";
+        return getNom() + " (PV: " + getForceDeVie() + ")";
     }
 }

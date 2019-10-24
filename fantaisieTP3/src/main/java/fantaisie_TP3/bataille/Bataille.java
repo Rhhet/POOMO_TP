@@ -5,9 +5,8 @@ import fantaisie_TP3.protagoniste.Homme;
 import fantaisie_TP3.protagoniste.Monstre;
 
 
-
 public class Bataille {
-    /* in <? extends Pouvoir> :  extends Pouvoir maybe useless but added
+    /* in <? extends Pouvoir> :  "extends Pouvoir" may be useless but added
      * for completeness         */
     
     private Camp<Homme> campHumains = new Camp<>();
@@ -16,7 +15,7 @@ public class Bataille {
      * can't specify a type T that won't be defined before
      * (such as Bataille<T extends Pouvoir>)                */
 
-
+     
     public void ajouter(Homme homme) {
         campHumains.ajouter(homme);
     }

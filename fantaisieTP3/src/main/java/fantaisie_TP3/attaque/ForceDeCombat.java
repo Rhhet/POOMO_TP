@@ -14,7 +14,7 @@ public abstract class ForceDeCombat {
      * operationnel à true de base et éviter quelques lignes de code dans
      * les constructeurs des sous classes. </p>
      */
-    protected boolean operationnel;     
+    private boolean operationnel;     
     
 
     /**
@@ -40,12 +40,7 @@ public abstract class ForceDeCombat {
         return operationnel;
     }
 
-    /** 
-     * Use only if {@link #operationnel} is declared as private.
-     * @param operationnel 
-     * */
-    @Deprecated
-    protected void setOperationnel(boolean operationnel) {
+    public void setOperationnel(boolean operationnel) {
         this.operationnel = operationnel;
     }
 
@@ -58,13 +53,12 @@ public abstract class ForceDeCombat {
                "\nPts deg: " + getPointDeDegat() + 
                "\nOperationnel: " + isOperationnel();
     }
-
     
     /**
      * Use the weapon/spell once.
      * @return weapon/spell damage.
      */
     public int utiliser() {
-        return isOperationnel() ? getPointDeDegat() : 0;
+        return operationnel ? pointDeDegat : 0;
     }
 }

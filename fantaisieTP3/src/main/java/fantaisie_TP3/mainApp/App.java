@@ -2,6 +2,8 @@ package fantaisie_TP3.mainApp;
 
 import java.util.NavigableSet;
 
+import util.lines.*;
+
 import fantaisie_TP3.attaque.pouvoirs.Pouvoir;
 import fantaisie_TP3.attaque.pouvoirs.fireSpells.*;
 import fantaisie_TP3.attaque.pouvoirs.iceSpells.*;
@@ -16,6 +18,7 @@ public class App {
 
     public static void main(String[] args) {
         
+        System.out.println("TP1-2 start\n");
         Monstre<Feu> dragotenebre = new Monstre<>("dragotenebre", 200, ZoneDeCombat.AERIEN, 
                                                   Domaine.FEU, new BouleDeFeu(4), new Lave(1), 
                                                   new Eclair(3));
@@ -54,19 +57,21 @@ public class App {
         System.out.println();
         AideEcrivain test = new AideEcrivain(bataille);
         System.out.println(test.visualiserForcesHumaines());
-
+        System.out.println("\nTP1-2 end");
+        Line.drawHztLine();
         /* ----------------------------  TP3.1  --------------------------------------- */
-
+        System.out.println("\nTP3.1 start\n");
         System.out.println(test.ordreNaturelMonstre());
         System.out.println();
 
         //test.updateMonstresZone();
         //System.out.println(test.getDomSet());
         System.out.println(test.ordreMonstreDomaine());
-        System.out.println();
-
+        System.out.println("\nTP3.1 end");
+        Line.drawHztLine();
         /* ----------------------------  TP3.2  --------------------------------------- */
-        
+        System.out.println("\nTP3.2 start\n");
+
         //test.initMonstresDeFeu_nMod_old();
         test.initMonstresDeFeu_nMod();
         test.initMonstresDeGlace_nMod();
@@ -84,19 +89,22 @@ public class App {
         soufflemort.rejoindBataille(bataille);
         cramombre.rejoindBataille(bataille);
 
-        test.updateMonstresDomaine();
+        
         /* the view monstres is automatically updated, just need to update the base tree set
-         * which is done by calling updateMonstresDomaine() or getMonstresDeFeu() but the latter
-         * re-initializes the view which isn't needed.  */
-        //monstres = test.getMonstresDeFeu();
+         * which is done by calling getMonstresDeFeu() */
+        monstres = test.getMonstresDeFeu();
         System.out.println(AideEcrivain.affichageMonstres(monstres));
 
         Monstre<Glace> givrogolem = new Monstre<>("givrogolem", 200, ZoneDeCombat.TERRESTRE,
                 Domaine.GLACE, new PicsDeGlace(10));
         givrogolem.rejoindBataille(bataille);
 
-        test.updateMonstresDomaine();
+        monstres = test.getMonstresDeFeu();
         System.out.println(AideEcrivain.affichageMonstres(monstres));
+        System.out.println("\nTP3.2 end");
+        Line.drawHztLine();
+        /* ----------------------------  TP3.2  --------------------------------------- */
+        System.out.println("\nTP3.3 start\n");
 
         Monstre<Feu> aqualave = new Monstre<>("aqualave", 30, ZoneDeCombat.AQUATIQUE,
                 Domaine.FEU, new Lave(5));
@@ -105,12 +113,12 @@ public class App {
         aqualave.rejoindBataille(bataille);
         requispectre.rejoindBataille(bataille);
         
-        test.updateMonstresDomaine();
-
+        
         System.out.println("\n" + test.ordreMonstreDomaine());
 
         System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresDeFeu()));
         System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresDeGlace()));
         System.out.println("\n" + AideEcrivain.affichageMonstres(test.getMonstresTranchants()));
+        System.out.println("\nTP3.3 end");
     }
 }

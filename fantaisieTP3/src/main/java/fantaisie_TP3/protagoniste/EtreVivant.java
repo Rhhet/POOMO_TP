@@ -6,9 +6,9 @@ import fantaisie_TP3.bataille.Bataille;
 
 public abstract class EtreVivant implements Comparable<EtreVivant> {
 
-    protected String nom;
-    protected int forceDeVie;
-    protected Bataille bataille; 
+    private String nom;
+    private int forceDeVie;
+    private Bataille bataille; 
 
     /**
      * EtreVivant constructor
@@ -26,7 +26,7 @@ public abstract class EtreVivant implements Comparable<EtreVivant> {
 
     public abstract void mourir();
 
-    /* getters */
+    /* getters/setters */
 
     public String getNom() {
         return nom;
@@ -36,12 +36,18 @@ public abstract class EtreVivant implements Comparable<EtreVivant> {
         return forceDeVie;
     }
 
+    public void setForceDeVie(int pv) {
+        forceDeVie = pv;
+    }
+
+    public Bataille getBataille() {
+        return bataille;
+    }
+
     @Override
     public int compareTo(EtreVivant etreVivant) {
         return nom.compareTo(etreVivant.nom);
     }
-
-
 
     @Override
     public String toString() {
@@ -51,7 +57,9 @@ public abstract class EtreVivant implements Comparable<EtreVivant> {
 
     @Override
     public boolean equals(Object ob) {
-        if (ob instanceof EtreVivant) {
+        if (this == ob) 
+            return true;
+        if (ob != null && ob instanceof EtreVivant) {
             EtreVivant etreVivant = (EtreVivant) ob;
             return (nom.equals(etreVivant.nom));
         }

@@ -29,7 +29,9 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
         bataille.ajouter(this);
     }
 
+    @Override
     public void mourir() {
+        Bataille bataille = getBataille();
         bataille.eliminer(this);
     }
 
@@ -74,14 +76,18 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
         return domaine;
     }
 
+    public T[] getAttaques() {
+        return attaques;
+    }
+
     /** 
-     * This method restores all powers in {@link #attaques} 
+     * Restores all powers in {@link #attaques} 
      * but thanks to a different implementation (more logical,
      * see {@link Pouvoir})
      * it will print "le pouvoir X est encore utilisable" if the
      * power has been declared with a nb of charge > 0.
      * <p>A power is operationnal when declared with at least 1
-     * charge, it doen't need to initialize the fight. </p>
+     * charge, it doen't need fight to be initialized.</p>
      * <p>Instanciates the class {@link GestionAttaque}.</p>
     */
     public void entreEnCombat() {
@@ -96,23 +102,14 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
      * Need to be called after {@link #entreEnCombat()} or after
      * a {@link GestionAttaque} object has been created in order
      * to declare the attribute {@link #gstAtt}.
-     * @return a random attack if it is available, or null.
      * <p>This method uses the {@link #hasNext()} and 
      * {@link #next()} methods declared in {@link GestionAttaque} 
      * meaning it may return the same attack when called twice.</p>
+     * @return a random attack if it is available, or null.
      */
     public T attaque() {
         return (gstAtt.hasNext()) ? gstAtt.next() 
                                   : null;
-    }
-
-
-    /**
-     * Getter on {@link #attaques}.
-     * @return {@link #attaques} attribute.
-     */
-    public T[] getAttaques() {
-        return attaques;
     }
 
     /**
@@ -133,7 +130,7 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
     }
 
     /*  *** Other version ***
-     (format moins lisible mais utilise toString() de Feu inherited de ForceDeCombat)
+     (less clear, but uses the toString method of Pouvoir)
 
     private String allAttaques2() {
         String str = "";
@@ -143,7 +140,6 @@ public class Monstre<T extends Pouvoir> extends EtreVivant {
         return str.substring(0, str.length() - 2);
     } */
     
-
     @Override
     public String toString() {
 

@@ -9,10 +9,9 @@ public class Epee extends Arme {
     public Epee(String nomEpee) {
         super(80, "Epee");
         this.nomEpee = nomEpee;
-        operationnel = true;
+        setOperationnel(true);
     }
 
-    //getter utilisant l'attribut nomEpee...
     public String getNomEpee() {
         return nomEpee;
     }

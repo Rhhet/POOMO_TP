@@ -7,7 +7,6 @@ public class Griffe extends Tranchant {
         super(20, "Griffe", -1);    //nbUtilisationPouvoirInitial = -1 means 
     }                               // infinite nb of utilisations
 
-
     //override utiliser(): Griffe utilisable un nb infini de fois...
     @Override
     public int utiliser() {

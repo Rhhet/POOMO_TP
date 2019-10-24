@@ -6,6 +6,6 @@ public class Boomerang extends Arme {
     
     public Boomerang() {
         super(20, "Boomerang");
-        operationnel = true;
+        setOperationnel(true);
     }
 }
