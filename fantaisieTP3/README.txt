@@ -21,7 +21,7 @@ fantaisie_TP3
   |__ mainApp
   |__ mainAppOld (for test purposes only + TP1)  
 util
-  |_ line
+  |_ lines
               
         
 TG
