@@ -1,14 +1,12 @@
---> Groupe: 
-
-###########   TP2 -- FANTAISIE    ###########
+###########   TP3 -- FANTAISIE    ###########
 #                                           #
-#      Téri   GRANDPIERRE   ---- READ ME    #
+#                  READ ME                  #
 #                                           #
 ###########        -------        ###########
 
-TP3 maven project
+This is a maven project of the TP3 "fantaisie".
 
-packages tree:
+Packages tree: 
 
 fantaisie_TP3
   |__ attaque
@@ -23,5 +21,7 @@ fantaisie_TP3
   |__ mainApp
   |__ mainAppOld (for test purposes only + TP1)  
 util
-  |_line
+  |_ line
+              
         
+TG
