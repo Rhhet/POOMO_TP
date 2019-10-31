@@ -21,6 +21,6 @@ public class Salle {
 
     @Override
     public String toString() {
-        return "Salle num " + numSalle + " de type " + zdc + ".";
+        return "Salle n°" + numSalle + " de type de combat " + zdc;
     }
 }

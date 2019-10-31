@@ -1,9 +1,14 @@
 package fantaisie_TP4.bataille;
 
-import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.NoSuchElementException;
+import java.util.Random;
+import java.util.Set;
 
 import fantaisie_TP4.protagoniste.Monstre;
 import fantaisie_TP4.protagoniste.ZoneDeCombat;
@@ -11,31 +16,67 @@ import fantaisie_TP4.protagoniste.ZoneDeCombat;
 
 public class Grotte {
     private int numeroSalleDecisive;
-    private AbstractMap<Salle, Bataille> batailles = new TreeMap<>();
-    private AbstractMap<Salle, List<Salle>> planGrotte = new TreeMap<>();
+    private Map<Salle, Bataille> batailles = new HashMap<>();
+    private HashMap<Salle, List<Salle>> planGrotte = new LinkedHashMap<>();
+    private Set<Salle> sallesExplorees = new HashSet<>();
 
-    public Grotte() {
 
+    public void ajouterSalle(ZoneDeCombat zdc, Monstre<?> ... monstre) {
+        Salle salle = new Salle(planGrotte.size() + 1, zdc);
+        Bataille newBataille = new Bataille();
+        List<Salle> salleList = new ArrayList<>();
+        
+        for (Monstre<?> mstr : monstre) {
+            if (mstr.getZDC() == zdc)
+                mstr.rejoindBataille(newBataille);
+        }
+        planGrotte.put(salle, salleList);
+        batailles.put(salle, newBataille);
     }
 
-    public void ajouterSalle(ZoneDeCombat zdc, Monstre<?> monstre) {
-
+    public void configurerAcces(int numSalleOrig, int ... sallesAcces) {
+        Salle salleOrig = trouverSalle(numSalleOrig);
+        List<Salle> salles = planGrotte.get(salleOrig);
+        for (int numSalle : sallesAcces) {
+            Salle salleToAdd = trouverSalle(numSalle);
+            salles.add(salleToAdd);
+        }
     }
 
-    public void configurerAcces(int ... arg) {
-
+    private Salle trouverSalle(int numSalle) {
+        Set<Salle> salles = planGrotte.keySet();
+        //int index = 0;
+        for (Salle salle : salles) {
+            if (salle.getNumeroSalle() == numSalle)
+                return salle;
+            //index++;
+        }
+        throw new NoSuchElementException();
     }
 
     public void setNumeroSalleDecisive(int num) {
         numeroSalleDecisive = num;
     }
 
-    public int getPremiereSalle() {
-        return 1;
+    public Salle premiereSalle() {
+        Salle firstSalle = trouverSalle(1);
+        sallesExplorees.add(firstSalle);
+        return firstSalle;
     }
 
-    public Salle salleSuivante() {
-        return null;
+    public Salle salleSuivante(Salle curSalle) {
+        List<Salle> salleAcces = planGrotte.get(curSalle);
+        Salle dstSalle;
+        salleAcces.removeAll(sallesExplorees);
+        if (salleAcces.isEmpty()) 
+            salleAcces = planGrotte.get(curSalle);
+        dstSalle = getRandomSalle(salleAcces);
+        return dstSalle;
+    }
+
+    private Salle getRandomSalle(List<Salle> listSalle) {
+        Random rand = new Random();
+        return listSalle.get(rand.nextInt(listSalle.size()));
     }
 
     public boolean salleDecisive(Salle salle) {
@@ -70,5 +111,19 @@ public class Grotte {
             affichage.append("\n");
         }
         return affichage.toString();
+    }
+
+    /*   getters   */
+
+    public Map<Salle, Bataille> getBatailles() {
+        return batailles;
+    }
+
+    public HashMap<Salle, List<Salle>> getPlanGrotte() {
+        return planGrotte;
+    }
+
+    public Set<Salle> getSallesExplorees() {
+        return sallesExplorees;
     }
 }

@@ -24,11 +24,8 @@ public class Camp<T extends EtreVivant> implements Iterable<T> {
 
 
     public void ajouter(T etreVivant) {
-        if (!liste.contains(etreVivant)) {
+        if (!liste.contains(etreVivant)) 
             liste.add(etreVivant);
-        } else {
-            System.out.println(etreVivant + "\n--> is already in the camp.");
-        }
     }
 
     /**

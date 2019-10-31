@@ -20,6 +20,7 @@ public class Bataille {
         campHumains.ajouter(homme);
     }
 
+    
     public void ajouter(Monstre<? extends Pouvoir> monstre) {
         campMonstres.ajouter(monstre);
     }
